@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            background-image: url(https://i.pinimg.com/originals/5e/fc/94/5efc94c50eb23675465c902b29330b38.png);
+            background-repeat: repeat;
+            font-size: 50px;
+        }
+
+        #container {
+
+            margin-left: auto;
+            margin-right: auto;
+            width: 1200px;
+            border: 3px solid white;
+        }
+
+        button {
+            width: 100px;
+
+
+        }
+
+        select {
+            width: 200px;
+            height: 30px;
+            font-size: large;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <form name="modulo">
+            <button type="button" id="sx"> &#9668 </button>
+            <select id="pokedex" name="pokedex1">
+
+                <script>
+                    let pokemon = ["Aggron", "Darkrai", "Garchomp", "Gengar", "Incineroar", "Lucario", "Scizor", "Snorlax", "Umbreon", "Urshifu"];
+
+                    document.write("<option selected disabled>Selezionare</option><option disabled >---</option>")
+                    for (let i = 0; i < pokemon.length; i++) {
+                        document.write("<option value='" + i + "'>" + pokemon[i] + "</option>");
+
+                    }
+
+
+                    document.getElementById("pokedex").addEventListener("change", caricaFoto);
+
+
+
+
+                    function caricaFoto() {
+                        let immagine = document.modulo.pokedex1.value;
+                        document.getElementById("imageContainer").innerHTML = "<img src='" + pokemon[document.modulo.pokedex1.value] + ".png'/>";
+
+                    }
+
+
+                    document.getElementById("sx").addEventListener("click", scorriSx);
+
+                    function scorriSx() {
+                        if (document.modulo.pokedex1.value == 0) {
+                            document.getElementById("imageContainer").innerHTML = "<img src='" + pokemon[pokemon.length - 1] + ".png'/>";
+                            document.modulo.pokedex1.value = pokemon.length - 1;
+
+                        } else {
+                            document.getElementById("imageContainer").innerHTML = "<img src='" + pokemon[document.modulo.pokedex1.value - 1] + ".png'/>";
+                            document.modulo.pokedex1.value = document.modulo.pokedex1.value - 1;
+                        }
+
+                    }
+
+
+
+                </script>
+
+            </select>
+            <button type="button" id="dx">&#9658 </button>
+            <script>
+
+                document.getElementById("dx").addEventListener("click", scorriDx);
+                function scorriDx() {
+                    if (document.modulo.pokedex1.value == pokemon.length - 1) {
+                        document.getElementById("imageContainer").innerHTML = "<img src='" + pokemon[0] + ".png'/>";
+                        document.modulo.pokedex1.value = 0;
+
+                    } else {
+                        document.getElementById("imageContainer").innerHTML = "<img src='" + pokemon[Number(document.getElementById("pokedex").value) + 1] + ".png'/>";
+                        document.modulo.pokedex1.value = Number(document.getElementById("pokedex").value) + 1;
+                    }
+
+                }
+
+            </script>
+        </form>
+        <div id="imageContainer"></div>
+
+    </div>
+
+</body>
+
+</html>
